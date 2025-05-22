@@ -6,12 +6,12 @@ import { ClientesComponent } from './clients/clients-list/clients-list.component
 import { ClientFormComponent } from './clients/client-form/client-form.component';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: 'clientes/novo', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'clientes/novo', component: ClientFormComponent },
-  { path: '**', redirectTo: 'clientes/novo' }
+  { path: '**', redirectTo: 'login' }
 ];
 
 export const appRoutingProviders = [

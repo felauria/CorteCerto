@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+out-tsc/
+
+# Angular build cache
+.angular/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files (geralmente você quer ignorar para não vazar segredos)
+src/environments/environment*.ts
+
+# Mac system files
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+
+# Compiled JavaScript files (se usar TypeScript)
+*.js
+*.js.map
+
+# Coverage reports
+coverage/
+
+# Others
+*.bak
+*.tmp
