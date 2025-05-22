@@ -14,7 +14,6 @@ export class NavbarComponent {
   constructor(private router: Router) {}
 
   logout() {
-    // Implemente sua lógica de logout aqui
     console.log('Usuário saiu');
     this.router.navigate(['/login']);
   }

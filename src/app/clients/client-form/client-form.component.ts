@@ -25,16 +25,14 @@ export class ClientFormComponent {
   onFotoSelecionada(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       this.fotoCliente = event.target.files[0];
-      // Aqui você pode implementar a pré-visualização se quiser
     }
   }
 
   voltar() {
-    // implementar navegação para voltar (exemplo: router.navigate(['/clientes']))
+    console.log("voltar")
   }
 
   salvar() {
-    // implementar lógica para salvar cliente
     console.log({
       nomeCompleto: this.nomeCompleto,
       telefone: this.telefone,
