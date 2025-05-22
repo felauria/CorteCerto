@@ -8,7 +8,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 interface Cliente {
   id: number;
   nome: string;
-  avatarUrl?: string; // pode deixar vazio e usar avatar padrão
+  avatarUrl?: string;
 }
 
 @Component({
@@ -24,7 +24,6 @@ export class ClientesComponent {
     { id: 2, nome: 'Maria Silva' },
     { id: 3, nome: 'João Pereira' },
     { id: 4, nome: 'Ana Souza' },
-    // adicione quantos quiser...
   ];
 
   filtroNome: string = '';
@@ -37,12 +36,10 @@ export class ClientesComponent {
 
   verCliente(id: number) {
     console.log('Ver cliente', id);
-    // implementar navegação para detalhes
   }
 
   editarCliente(id: number) {
     console.log('Editar cliente', id);
-    // implementar navegação para edição
   }
 
   deletarCliente(id: number) {
@@ -53,6 +50,5 @@ export class ClientesComponent {
 
   novoCliente() {
     console.log('Cadastrar novo cliente');
-    // implementar navegação para cadastro
   }
 }
