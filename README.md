@@ -1,59 +1,77 @@
-# Ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+---
 
-## Development server
+# ✂️ CorteCerto
 
-To start a local development server, run:
+## 📋 Descrição
 
-```bash
-ng serve
-```
+O CorteCerto é uma aplicação web para gestão de barbearias, criada para facilitar o controle de agendamentos, clientes e serviços oferecidos. O sistema visa proporcionar uma experiência organizada tanto para barbeiros quanto para clientes, otimizando o dia a dia e melhorando a gestão do negócio.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Funcionalidades Principais
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* 👤 Cadastro e login de usuários (email e senha, Google e Facebook)
+* 🧑‍🤝‍🧑 Cadastro e gerenciamento de clientes (nome, plano, telefone, data de nascimento, observações, foto)
+* 📅 Agendamento de serviços com seleção de data, horário e tipo de corte
+* 🔄 Visualização, edição e exclusão de agendamentos
+* 📊 Dashboard com visão geral da barbearia
+* 🔍 Busca e gerenciamento da lista de clientes
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🛠️ Status do Projeto
 
-```bash
-ng generate --help
-```
+* 🎨 Telas principais (Login/Cadastro, Tela Principal, Cadastro e Lista de Clientes) com estrutura visual pronta e funcionalidades básicas usando dados mock.
+* 🔌 Integração com banco de dados e persistência real ainda em desenvolvimento.
+* 🧩 Outras telas e funcionalidades estão sendo criadas e serão adicionadas nas próximas versões.
 
-## Building
+---
 
-To build the project run:
+## 🖥️ Tecnologias Utilizadas
 
-```bash
-ng build
-```
+* Front-end: HTML, CSS, JavaScript (frameworks específicos a definir)
+* Back-end: (inserir tecnologia, ex: Django Rest Framework, Node.js)
+* Banco de Dados: (inserir banco, ex: PostgreSQL, MySQL, MongoDB)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## ⚙️ Como Rodar o Projeto
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Clone este repositório
 
-```bash
-ng test
-```
+   ```bash
+   git clone https://github.com/seu-usuario/cortecerto.git
+   ```
+2. Instale as dependências
 
-## Running end-to-end tests
+   ```bash
+   npm install
+   ```
+3. Configure as variáveis de ambiente (ex: conexão com banco, credenciais OAuth)
+4. Execute o servidor de desenvolvimento
 
-For end-to-end (e2e) testing, run:
+   ```bash
+   npm start
+   ```
+5. Acesse no navegador: `http://localhost:3000`
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📈 Próximos Passos
 
-## Additional Resources
+* 🗄️ Implementar integração completa com banco de dados
+* 🔐 Finalizar sistema de autenticação real (login, logout, recuperação de senha)
+* 🖥️ Desenvolver as telas e funcionalidades restantes
+* 💡 Melhorar UX com notificações e validações
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🤝 Contato
+
+Alunos responsáveis pelo projeto:
+
+* Arthur Margarinho Oliveira de Souza
+* Felipe Lauria Fialho
+
+---
