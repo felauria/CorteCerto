@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="login-left">
+    <img src="assets/logo-corte-certo.svg" alt="Corte Certo" class="logo" />
+    <h1>Bem vindo de volta!</h1>
+    <p>Entre ou faça seu cadastro</p>
+
+    <input
+      type="text"
+      placeholder="Email ou username"
+      [(ngModel)]="email"
+      class="input-email"
+    />
+    <p *ngIf="emailError" class="error-message">{{ emailError }}</p>
+    <button class="btn-continue" (click)="continue()">Continue</button>
+
+    <p class="ou-text">Ou</p>
+
+    <button class="btn-google">
+      <img src="assets/google-icon.svg" alt="Google" />
+      Continue com Google
+    </button>
+    <button class="btn-facebook">
+      <img src="assets/facebook-icon.svg" alt="Facebook" />
+      Continue com Facebook
+    </button>
+
+    <a href="#" class="forgot-link">Esqueci meu usuário/senha</a>
+  </div>
+
+  <div class="login-right">
+    <img src="assets/barbershop.jpg" alt="Barbearia" />
+  </div>
+</div>

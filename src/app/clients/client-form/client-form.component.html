@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="container">
+<section class="client-form-container">
+  <header>
+    <h2>Cadastro de cliente</h2>
+    <button (click)="voltar()" class="btn-voltar">Voltar</button>
+  </header>
+
+  <form>
+    <div class="form-group">
+      <label for="nomeCompleto">Nome completo</label>
+      <input id="nomeCompleto" type="text" [(ngModel)]="nomeCompleto" name="nomeCompleto" />
+    </div>
+
+    <div class="form-group-infos-container">
+      <div class="form-group-infos">
+        <div class="form-group">
+          <label for="telefone">Telefone / Whatsapp</label>
+          <input id="telefone" type="tel" placeholder="(XX) XXXXX - XXXX" [(ngModel)]="telefone" name="telefone" />
+        </div>
+
+        <div class="form-group">
+          <label for="plano">Plano</label>
+          <select id="plano" [(ngModel)]="plano" name="plano">
+            <option *ngFor="let p of planos" [value]="p">{{ p }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dataNascimento">Data de nascimento</label>
+          <input id="dataNascimento" type="date" [(ngModel)]="dataNascimento" name="dataNascimento" />
+        </div>
+      </div>
+
+      <div class="foto-cliente">
+        <label for="fotoCliente" class="upload-label">
+          <input type="file" id="fotoCliente" (change)="onFotoSelecionada($event)" hidden />
+          <div class="upload-area">
+            <span class="plus-icon">+</span>
+            <p>Selecione o arquivo ou arraste até aqui</p>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="observacao">Observação</label>
+      <textarea id="observacao" rows="3" [(ngModel)]="observacao" name="observacao"></textarea>
+    </div>
+
+
+    <button type="button" (click)="salvar()" class="btn-salvar">Salvar</button>
+  </form>
+</section>
+</div>
+<app-footer></app-footer>

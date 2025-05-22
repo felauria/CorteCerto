@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+
+<section class="hero">
+  <img src="assets/barbershop.jpg" alt="Barbershop" class="hero-image" />
+</section>
+
+<section class="actions-menu">
+  <div class="action-group dashboard">
+    <div class="action-card">
+      <span class="icon">📊</span>
+      <a routerLink="/dashboard" class="action-link">Dashboard</a>
+    </div>
+  </div>
+
+  <div class="action-group clientes">
+    <div class="action-card">
+      <span class="icon">👤</span>
+      <a routerLink="/clientes" class="action-link">Ver Clientes</a>
+    </div>
+    <div class="action-card">
+      <span class="icon">➕</span>
+      <a routerLink="/clientes/cadastrar" class="action-link">Cadastrar Cliente</a>
+    </div>
+  </div>
+
+  <div class="action-group agendamentos">
+    <div class="action-card">
+      <span class="icon">📅</span>
+      <a routerLink="/agendamentos" class="action-link">Agendamentos</a>
+    </div>
+    <div class="action-card">
+      <span class="icon">➕</span>
+      <a routerLink="/agendamentos/novo" class="action-link">Novo Agendamento</a>
+    </div>
+  </div>
+</section>
+
+<section class="appointments-section">
+  <h2>Agendamentos de hoje</h2>
+  <div class="cards">
+    <div class="card" *ngFor="let agendamento of agendamentosHoje">
+      <div class="avatar"></div>
+      <div class="info">
+        <strong>{{ agendamento.nome }}</strong><br />
+        <small>{{ agendamento.data }} - {{ agendamento.hora }}</small><br />
+        <span
+          class="package"
+          [ngClass]="{
+            basic: agendamento.pacote === 'Pacote básico',
+            premium: agendamento.pacote === 'Pacote premium'
+          }"
+          *ngIf="agendamento.pacote"
+          >⭐ {{ agendamento.pacote }}</span
+        ><br />
+        <p>{{ agendamento.descricao }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Próximos agendamentos</h2>
+  <div class="cards">
+    <div class="card" *ngFor="let agendamento of proximosAgendamentos">
+      <div class="avatar"></div>
+      <div class="info">
+        <strong>{{ agendamento.nome }}</strong><br />
+        <small>{{ agendamento.data }} - {{ agendamento.hora }}</small><br />
+        <span
+          class="package"
+          [ngClass]="{
+            basic: agendamento.pacote === 'Pacote básico',
+            premium: agendamento.pacote === 'Pacote premium'
+          }"
+          *ngIf="agendamento.pacote"
+          >⭐ {{ agendamento.pacote }}</span
+        ><br />
+        <p>{{ agendamento.descricao }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

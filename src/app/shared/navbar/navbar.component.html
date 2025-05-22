@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <img src="assets/logo-corte-certo.svg" alt="Logo" class="logo" />
+
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
+    </li>
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    </li>
+    <li>
+      <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
+    </li>
+    <li>
+      <a routerLink="/agendamentos" routerLinkActive="active">Agendamentos</a>
+    </li>
+  </ul>
+
+  <div class="user-section">
+    <span>{{ userName }}</span>
+    <button (click)="logout()">Sair</button>
+  </div>
+</nav>
