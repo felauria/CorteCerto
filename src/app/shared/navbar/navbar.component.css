@@ -1,11 +1,16 @@
 .navbar {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   background-color: #121212;
   padding: 1rem 2rem;
   font-family: 'Inter', sans-serif;
   color: white;
+  height: 420px;
+  background-image: url('../../../../public/assets/header-back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .logo {
