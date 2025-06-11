@@ -58,6 +58,30 @@ O CorteCerto é uma aplicação web para gestão de barbearias, criada para faci
 
 ---
 
+### Rodando a API (Back-end)
+
+1. Acesse a pasta da API:
+
+   ```bash
+   cd src/app/api
+   ```
+
+2. Instale as dependências da API:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Execute o servidor FastAPI:
+
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+4. Acesse a API em: `http://localhost:8000`
+
+---
+
 ## 📈 Próximos Passos
 
 * 🗄️ Implementar integração completa com banco de dados
