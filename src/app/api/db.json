@@ -1,0 +1,28 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "123456"
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "João Silva",
+      "telefone": "11999999999"
+    },
+    {
+      "id": 2,
+      "nome": "Maria Souza",
+      "telefone": "11888888888"
+    }
+  ],
+  "agendamentos": [
+    {
+      "id": 1,
+      "cliente_id": 1,
+      "data": "2025-06-12T14:00:00"
+    }
+  ]
+}
