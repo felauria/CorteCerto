@@ -80,7 +80,6 @@ export class AppointmentFormComponent implements OnInit {
           horaFim: agendamento.horaFim,
           descricao: agendamento.descricao,
         };
-        // Marcar serviços selecionados
         if (agendamento.servicos) {
           this.servicos.forEach((s) => {
             s.selecionado = agendamento.servicos.includes(s.nome);

@@ -41,7 +41,7 @@ export class RegisterComponent {
     }
     this.authService.register(this.newUser).subscribe({
       next: () => {
-        this.showSuccessModal = true; // <-- Mostra o modal
+        this.showSuccessModal = true;
       },
       error: (err) => {
         alert("Erro ao cadastrar: " + err.message);
