@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="client-form-container">
+    <header>
+      <h2>Dados do cliente</h2>
+      <button (click)="voltar()" class="btn-voltar">Voltar</button>
+    </header>
+
+    <form *ngIf="cliente">
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" [value]="cliente.nome" readonly />
+      </div>
+
+      <div class="form-group-infos-container">
+        <div class="form-group-infos">
+          <div class="form-group">
+            <label>Telefone / Whatsapp</label>
+            <input type="tel" [value]="cliente.telefone" readonly />
+          </div>
+
+          <div class="form-group">
+            <label>Plano</label>
+            <input type="text" [value]="cliente.plano" readonly />
+          </div>
+
+          <div class="form-group">
+            <label>Data de nascimento</label>
+            <input type="date" [value]="cliente.dataNascimento" readonly />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Observação</label>
+        <textarea rows="3" [value]="cliente.observacao" readonly></textarea>
+      </div>
+    </form>
+  </section>
+</div>
+<app-footer></app-footer>

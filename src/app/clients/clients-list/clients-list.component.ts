@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import { FooterComponent } from '../../shared/footer/footer.component';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Router, RouterModule } from "@angular/router";
+import { NavbarComponent } from "../../shared/navbar/navbar.component";
+import { FooterComponent } from "../../shared/footer/footer.component";
+import { ClientService } from "../../services/client.service";
+import { MatIconModule } from "@angular/material/icon";
 
 interface Cliente {
   id: number;
@@ -12,43 +14,58 @@ interface Cliente {
 }
 
 @Component({
-  selector: 'app-clientes',
-  templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.css'],
+  selector: "app-clientes",
+  templateUrl: "./clients-list.component.html",
+  styleUrls: ["./clients-list.component.css"],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, NavbarComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    NavbarComponent,
+    FooterComponent,
+    MatIconModule,
+  ],
 })
-export class ClientesComponent {
-  clientes: Cliente[] = [
-    { id: 1, nome: 'Felipe Lauria Fialho' },
-    { id: 2, nome: 'Maria Silva' },
-    { id: 3, nome: 'João Pereira' },
-    { id: 4, nome: 'Ana Souza' },
-  ];
+export class ClientesComponent implements OnInit {
+  clientes: Cliente[] = [];
+  filtroNome: string = "";
 
-  filtroNome: string = '';
+  constructor(private clientService: ClientService, private router: Router) {}
+
+  ngOnInit() {
+    this.carregarClientes();
+  }
+
+  carregarClientes() {
+    this.clientService.getClientes().subscribe((clientes) => {
+      this.clientes = clientes;
+    });
+  }
 
   get clientesFiltrados(): Cliente[] {
-    return this.clientes.filter(cliente =>
+    return this.clientes.filter((cliente) =>
       cliente.nome.toLowerCase().includes(this.filtroNome.toLowerCase())
     );
   }
 
   verCliente(id: number) {
-    console.log('Ver cliente', id);
+    this.router.navigate(['/clientes/visualizar', id]);
   }
 
   editarCliente(id: number) {
-    console.log('Editar cliente', id);
+    this.router.navigate(["/clientes/editar", id]);
   }
 
   deletarCliente(id: number) {
-    if (confirm('Deseja realmente excluir este cliente?')) {
-      this.clientes = this.clientes.filter(c => c.id !== id);
+    if (confirm("Deseja realmente excluir este cliente?")) {
+      this.clientService.excluirCliente(id).subscribe(() => {
+        this.carregarClientes();
+      });
     }
   }
 
   novoCliente() {
-    console.log('Cadastrar novo cliente');
+    this.router.navigate(["/clientes/novo"]);
   }
 }
