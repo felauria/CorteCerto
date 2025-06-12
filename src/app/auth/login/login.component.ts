@@ -31,7 +31,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
         localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify(res.user)); // <-- Salva o usuário
+        localStorage.setItem('user', JSON.stringify(res.user));
         this.router.navigate(["/home"]);
       },
       error: (err) => {

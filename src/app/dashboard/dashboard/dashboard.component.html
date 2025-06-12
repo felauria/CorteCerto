@@ -1,1 +1,31 @@
-<p>dashboard works!</p>
+<app-navbar></app-navbar>
+<div class="container" style="min-height:80vh;">
+  <h2 style="margin-top:2rem;">Dashboard</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top:2rem;">
+    <div style="flex:1; min-width:320px; background:#191919; border-radius:12px; padding:2rem;">
+      <h3 style="color:#25b19e;">Clientes que mais cortaram (mês atual)</h3>
+      <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [type]="pieChartType"
+        [legend]="true"
+        [options]="{responsive:true, plugins:{legend:{labels:{color:'white'}}}}"
+      ></canvas>
+    </div>
+    <div style="flex:1; min-width:320px; background:#191919; border-radius:12px; padding:2rem;">
+      <h3 style="color:#25b19e;">Cortes por mês ({{ (new Date()).getFullYear() }})</h3>
+      <canvas baseChart
+        [data]="barChartData"
+        [labels]="barChartLabels"
+        [type]="barChartType"
+        [legend]="true"
+        [options]="{
+          responsive:true,
+          plugins:{legend:{labels:{color:'white'}}},
+          scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}}}
+        }"
+      ></canvas>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

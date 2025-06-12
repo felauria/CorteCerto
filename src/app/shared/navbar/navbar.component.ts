@@ -15,13 +15,13 @@ export class NavbarComponent {
     const userStr = localStorage.getItem('user');
     if (userStr) {
       const user = JSON.parse(userStr);
-      this.userName = user.nome || user.username; // Mostra nome, se existir, senão username
+      this.userName = user.nome || user.username;
     }
   }
 
   logout() {
     localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('user'); // Limpa o usuário ao sair
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

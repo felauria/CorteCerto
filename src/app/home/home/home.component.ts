@@ -6,7 +6,7 @@ import { RouterModule, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppointmentService } from '../../services/appointments.service';
-import { MatIconModule } from '@angular/material/icon'; // Adicione esta linha
+import { MatIconModule } from '@angular/material/icon';
 
 interface Appointment {
   nome: string;
@@ -27,7 +27,7 @@ interface Appointment {
     CommonModule,
     RouterModule,
     RouterLink,
-    MatIconModule, // Adicione aqui
+    MatIconModule,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarAgendamentosHoje();
-    // this.carregarProximosAgendamentos();
   }
 
   carregarAgendamentosHoje() {
