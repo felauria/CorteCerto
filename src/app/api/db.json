@@ -36,20 +36,81 @@
   "clientes": [
     {
       "id": 1,
-      "nome": "João Silva",
-      "telefone": "11999999999"
+      "nome": "Felipe Lauria",
+      "telefone": ""
     },
     {
       "id": 2,
-      "nome": "Maria Souza",
-      "telefone": "11888888888"
+      "nome": "Guilherme Reis",
+      "telefone": ""
+    },
+    {
+      "id": 3,
+      "nome": "Diogo Nogueira",
+      "telefone": ""
+    },
+    {
+      "id": 4,
+      "nome": "Lucas Campos",
+      "telefone": ""
+    },
+    {
+      "id": 5,
+      "nome": "Diogo Alves",
+      "telefone": ""
+    },
+    {
+      "id": 6,
+      "nome": "João Marcelo",
+      "telefone": ""
     }
   ],
   "agendamentos": [
     {
       "id": 1,
       "cliente_id": 1,
-      "data": "2025-06-12T14:00:00"
+      "data": "2025-06-12",
+      "hora": "14:00",
+      "pacote": "básico",
+      "descricao": "Cabelo, sobrancelha e barba."
+    },
+    {
+      "id": 2,
+      "cliente_id": 2,
+      "data": "2025-06-12",
+      "hora": "15:30",
+      "pacote": "premium",
+      "descricao": "Cabelo, luzes, sobrancelha e barba."
+    },
+    {
+      "id": 3,
+      "cliente_id": 3,
+      "data": "2025-06-12",
+      "hora": "16:30",
+      "descricao": "Cabelo e barba."
+    },
+    {
+      "id": 4,
+      "cliente_id": 4,
+      "data": "2025-06-13",
+      "hora": "09:00",
+      "pacote": "básico",
+      "descricao": "Cabelo."
+    },
+    {
+      "id": 5,
+      "cliente_id": 5,
+      "data": "2025-06-13",
+      "hora": "10:30",
+      "pacote": "premium",
+      "descricao": "Cabelo e sobrancelha."
+    },
+    {
+      "id": 6,
+      "cliente_id": 6,
+      "data": "2025-06-13",
+      "hora": "11:00",
+      "descricao": "Cabelo e barba."
     }
   ]
 }

@@ -9,12 +9,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  userName = 'Felipe Lauria';
+  userName: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      this.userName = user.nome || user.username; // Mostra nome, se existir, senão username
+    }
+  }
 
   logout() {
-    console.log('Usuário saiu');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('user'); // Limpa o usuário ao sair
     this.router.navigate(['/login']);
   }
 }

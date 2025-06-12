@@ -88,13 +88,13 @@
 }
 
 .package.basic {
-  color: green;
+  color: #25b19e;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
 .package.premium {
-  color: purple;
+  color: #9968BF;
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -105,7 +105,6 @@
   /* background-color: #1f1f1f; */
   padding: 2rem 1rem;
   border-radius: 8px;
-  margin-bottom: 2rem;
   color: white;
   font-family: 'Inter', sans-serif;
 }

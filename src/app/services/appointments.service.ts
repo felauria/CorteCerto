@@ -33,4 +33,8 @@ export class AppointmentService {
   getAgendamentosByClienteId(clienteId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/cliente/${clienteId}`);
   }
+
+  getAgendamentosHoje(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/hoje`);
+  }
 }

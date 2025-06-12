@@ -3,29 +3,29 @@
 <section class="actions-menu">
   <div class="action-group dashboard">
     <div class="action-card">
-      <span class="icon">📊</span>
+      <mat-icon>dashboard</mat-icon>
       <a routerLink="/dashboard" class="action-link">Dashboard</a>
     </div>
   </div>
 
   <div class="action-group clientes">
     <div class="action-card">
-      <span class="icon">👤</span>
+      <mat-icon>person</mat-icon>
       <a routerLink="/clientes" class="action-link">Ver Clientes</a>
     </div>
     <div class="action-card">
-      <span class="icon">➕</span>
+      <mat-icon>person_add</mat-icon>
       <a routerLink="/clientes/novo" class="action-link">Cadastrar Cliente</a>
     </div>
   </div>
 
   <div class="action-group agendamentos">
     <div class="action-card">
-      <span class="icon">📅</span>
+      <mat-icon>event</mat-icon>
       <a routerLink="/agendamentos" class="action-link">Agendamentos</a>
     </div>
     <div class="action-card">
-      <span class="icon">➕</span>
+      <mat-icon>add_circle</mat-icon>
       <a routerLink="/agendamentos/novo" class="action-link">Novo Agendamento</a>
     </div>
   </div>
@@ -46,29 +46,15 @@
             premium: agendamento.pacote === 'Pacote premium'
           }"
           *ngIf="agendamento.pacote"
-          >⭐ {{ agendamento.pacote }}</span
-        ><br />
-        <p>{{ agendamento.descricao }}</p>
-      </div>
-    </div>
-  </div>
-
-  <h2>Próximos agendamentos</h2>
-  <div class="cards">
-    <div class="card" *ngFor="let agendamento of proximosAgendamentos">
-      <div class="avatar"></div>
-      <div class="info">
-        <strong>{{ agendamento.nome }}</strong><br />
-        <small>{{ agendamento.data }} - {{ agendamento.hora }}</small><br />
-        <span
-          class="package"
-          [ngClass]="{
-            basic: agendamento.pacote === 'Pacote básico',
-            premium: agendamento.pacote === 'Pacote premium'
-          }"
-          *ngIf="agendamento.pacote"
-          >⭐ {{ agendamento.pacote }}</span
-        ><br />
+        >
+          <mat-icon
+            [ngStyle]="{
+              color: agendamento.pacote === 'Pacote básico' ? 'green' : agendamento.pacote === 'Pacote premium' ? 'purple' : 'inherit'
+            }"
+            >star</mat-icon
+          >
+          {{ agendamento.pacote }}
+        </span><br />
         <p>{{ agendamento.descricao }}</p>
       </div>
     </div>
