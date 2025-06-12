@@ -14,6 +14,8 @@ interface Appointment {
   hora: string;
   pacote?: string;
   descricao: string;
+  servicos: string[];
+  valor?: number;
 }
 
 @Component({
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarAgendamentosHoje();
-    this.carregarProximosAgendamentos();
+    // this.carregarProximosAgendamentos();
   }
 
   carregarAgendamentosHoje() {
@@ -48,39 +50,48 @@ export class HomeComponent implements OnInit {
         data: this.formatarData(item.agendamento.data),
         hora: item.agendamento.hora,
         pacote: item.agendamento.pacote,
-        descricao: item.agendamento.descricao,
+        descricao: item.agendamento.descricao || '',
+        servicos: item.agendamento.servicos || [],
       }));
     });
   }
 
-  carregarProximosAgendamentos() {
-    this.appointmentService.getAgendamentos().subscribe((data) => {
-      const hoje = new Date();
-      this.proximosAgendamentos = data
-        .filter((item) => {
-          const dataAgendamento = new Date(
-            item.agendamento.data + 'T' + item.agendamento.hora
-          );
-          return dataAgendamento > hoje;
-        })
-        .sort((a, b) => {
-          const dataA = new Date(a.agendamento.data + 'T' + a.agendamento.hora);
-          const dataB = new Date(b.agendamento.data + 'T' + b.agendamento.hora);
-          return dataA.getTime() - dataB.getTime();
-        })
-        .map((item) => ({
-          nome: item.cliente?.nome || item.agendamento.nome,
-          data: this.formatarData(item.agendamento.data),
-          hora: item.agendamento.hora,
-          pacote: item.agendamento.pacote,
-          descricao: item.agendamento.descricao,
-        }));
-    });
-  }
+  // carregarProximosAgendamentos() {
+  //   this.appointmentService.getAgendamentos().subscribe((data) => {
+  //     const hoje = new Date();
+  //     this.proximosAgendamentos = data
+  //       .filter((item) => {
+  //         const dataAgendamento = new Date(
+  //           item.agendamento.data + 'T' + item.agendamento.hora
+  //         );
+  //         return dataAgendamento > hoje;
+  //       })
+  //       .sort((a, b) => {
+  //         const dataA = new Date(a.agendamento.data + 'T' + a.agendamento.hora);
+  //         const dataB = new Date(b.agendamento.data + 'T' + b.agendamento.hora);
+  //         return dataA.getTime() - dataB.getTime();
+  //       })
+  //       .map((item) => ({
+  //         nome: item.cliente?.nome || item.agendamento.nome,
+  //         data: this.formatarData(item.agendamento.data),
+  //         hora: item.agendamento.hora,
+  //         pacote: item.agendamento.pacote,
+  //         descricao: item.agendamento.descricao,
+  //         servicos: item.agendamento.servicos || [],
+  //       }));
+  //   });
+  // }
 
   private formatarData(data: string): string {
     if (!data) return '';
     const [_, mes, dia] = data.split('-');
     return `${dia}/${mes}`;
+  }
+
+  formatarServicos(servicos: string[]): string {
+    if (!servicos || servicos.length === 0) return '';
+    if (servicos.length === 1) return servicos[0];
+    if (servicos.length === 2) return servicos.join(' e ');
+    return servicos.slice(0, -1).join(', ') + ' e ' + servicos[servicos.length - 1];
   }
 }

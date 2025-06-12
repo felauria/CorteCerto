@@ -7,6 +7,7 @@ import { ClientFormComponent } from './clients/client-form/client-form.component
 import { RegisterComponent } from './auth/register/register.component';
 import { authGuard } from './auth/auth.guard';
 import { ClientViewComponent } from './clients/client-view/client-view.component';
+import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ export const appRoutes: Routes = [
   { path: 'clientes/novo', component: ClientFormComponent, canActivate: [authGuard] },
   { path: 'clientes/editar/:id', component: ClientFormComponent, canActivate: [authGuard] },
   { path: 'clientes/visualizar/:id', component: ClientViewComponent, canActivate: [authGuard] },
+  { path: 'agendamentos/novo', component: AppointmentFormComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 
