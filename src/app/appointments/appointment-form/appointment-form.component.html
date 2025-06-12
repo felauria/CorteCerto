@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <h1 class="title">Novo agendamento</h1>
+  <h1 class="title">{{ editando ? 'Editar agendamento' : 'Novo agendamento' }}</h1>
 
   <form class="form" (ngSubmit)="onSave()">
     <div class="row">
       <div class="form-group">
         <label for="cliente">Cliente</label>
-        <select id="cliente" [(ngModel)]="agendamento.clienteId" name="cliente" required>
+        <select id="cliente" [(ngModel)]="agendamento.cliente_id" name="cliente" required>
           <option value="" disabled selected>Selecione o cliente</option>
           <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</option>
         </select>
@@ -52,7 +52,7 @@
 
     <div class="buttons">
       <button type="button" class="button" (click)="voltar()">Voltar</button>
-      <button type="submit" class="button-primary">Salvar</button>
+      <button type="submit" class="button-primary">{{ editando ? 'Salvar alterações' : 'Salvar' }}</button>
     </div>
   </form>
 </div>

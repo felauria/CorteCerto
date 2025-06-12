@@ -3,7 +3,7 @@ import { ClientService } from "../../services/client.service";
 import { AppointmentService } from "../../services/appointments.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { RouterModule, Router } from "@angular/router";
+import { RouterModule, Router, ActivatedRoute } from "@angular/router";
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 
@@ -36,28 +36,58 @@ export class AppointmentFormComponent implements OnInit {
   ];
 
   agendamento: any = {
-    clienteId: null,
+    cliente_id: null,
     data: "",
     hora: "",
     descricao: "",
   };
 
   valorTotal: number = 0;
+  editando: boolean = false;
+  idAgendamento?: number;
 
   constructor(
     private clientService: ClientService,
     private appointmentService: AppointmentService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.carregarClientes();
+    this.idAgendamento = Number(this.route.snapshot.paramMap.get("id"));
+    if (this.idAgendamento) {
+      this.editando = true;
+      this.carregarAgendamento();
+    }
   }
 
   carregarClientes() {
     this.clientService.getClientes().subscribe((data) => {
       this.clientes = data;
     });
+  }
+
+  carregarAgendamento() {
+    this.appointmentService
+      .getAgendamentoById(this.idAgendamento!)
+      .subscribe((res) => {
+        const agendamento = res.agendamento;
+        this.agendamento = {
+          cliente_id: agendamento.cliente_id,
+          data: agendamento.data,
+          hora: agendamento.hora,
+          horaFim: agendamento.horaFim,
+          descricao: agendamento.descricao,
+        };
+        // Marcar serviços selecionados
+        if (agendamento.servicos) {
+          this.servicos.forEach((s) => {
+            s.selecionado = agendamento.servicos.includes(s.nome);
+          });
+          this.atualizarValor();
+        }
+      });
   }
 
   atualizarValor() {
@@ -78,20 +108,37 @@ export class AppointmentFormComponent implements OnInit {
 
     const agendamentoFinal = {
       ...this.agendamento,
+      cliente_id: this.agendamento.cliente_id ? parseInt(this.agendamento.cliente_id, 10) : null,
       servicos: servicosSelecionados,
       valor: this.valorTotal,
     };
 
-    this.appointmentService.adicionarAgendamento(agendamentoFinal).subscribe({
-      next: () => {
-        alert("Agendamento salvo com sucesso!");
-        this.router.navigate(["/home"]);
-      },
-      error: () => {
-        alert("Erro ao salvar agendamento!");
-      },
-    });
+    if (this.editando && this.idAgendamento) {
+      this.appointmentService
+        .atualizarAgendamento(this.idAgendamento, agendamentoFinal)
+        .subscribe({
+          next: () => {
+            alert("Agendamento atualizado com sucesso!");
+            this.router.navigate(["/agendamentos/lista"]);
+          },
+          error: () => {
+            alert("Erro ao atualizar agendamento!");
+          },
+        });
+    } else {
+      this.appointmentService.adicionarAgendamento(agendamentoFinal).subscribe({
+        next: () => {
+          alert("Agendamento salvo com sucesso!");
+          this.router.navigate(["/agendamentos/lista"]);
+        },
+        error: () => {
+          alert("Erro ao salvar agendamento!");
+        },
+      });
+    }
   }
 
-  voltar() {}
+  voltar() {
+    this.router.navigate(["/agendamentos/lista"]);
+  }
 }
