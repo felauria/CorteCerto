@@ -3,14 +3,16 @@
   <section class="clientes-container">
     <header>
       <h2>Lista de clientes</h2>
-      <button (click)="novoCliente()" class="btn-novo">Novo Cliente</button>
+      <button (click)="novoCliente()" class="btn-novo">
+        <mat-icon>person_add</mat-icon> Novo Cliente
+      </button>
     </header>
 
     <div class="lista-busca">
       <ul class="lista-clientes">
         <li *ngFor="let cliente of clientesFiltrados" class="cliente-item">
           <div class="avatar">
-            <img src="assets/avatar-default.png" alt="Avatar" />
+            <mat-icon>person</mat-icon>
           </div>
           <span class="nome-cliente">{{ cliente.nome }}</span>
 
@@ -20,21 +22,21 @@
               (click)="verCliente(cliente.id)"
               title="Ver"
             >
-              👁️
+              <mat-icon>visibility</mat-icon>
             </button>
             <button
               class="btn-azul"
               (click)="editarCliente(cliente.id)"
               title="Editar"
             >
-              ✏️
+              <mat-icon>edit</mat-icon>
             </button>
             <button
               class="btn-vermelho"
               (click)="deletarCliente(cliente.id)"
               title="Excluir"
             >
-              🗑️
+              <mat-icon>delete</mat-icon>
             </button>
           </div>
         </li>
@@ -46,10 +48,9 @@
           placeholder="Busque pelo nome"
           [(ngModel)]="filtroNome"
         />
-        <button><span>🔍</span></button>
+        <button><mat-icon>search</mat-icon></button>
       </div>
     </div>
   </section>
 </div>
-
 <app-footer></app-footer>
