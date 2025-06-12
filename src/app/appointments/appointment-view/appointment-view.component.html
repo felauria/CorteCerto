@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="container" *ngIf="agendamento && cliente">
+  <section class="appointment-view-container">
+    <header>
+      <h2>Detalhes do Agendamento</h2>
+      <button (click)="voltar()" class="btn-voltar">Voltar</button>
+    </header>
+    <div>
+      <strong>Cliente:</strong> {{ cliente.nome }}
+    </div>
+    <div>
+      <strong>Data:</strong> {{ agendamento.data }}
+    </div>
+    <div>
+      <strong>Hora:</strong> {{ agendamento.hora }}
+    </div>
+    <div *ngIf="agendamento.horaFim">
+      <strong>Hora Fim:</strong> {{ agendamento.horaFim }}
+    </div>
+    <div>
+      <strong>Serviços:</strong> {{ agendamento.servicos?.join(', ') }}
+    </div>
+    <div *ngIf="agendamento.valor">
+      <strong>Valor:</strong> R$ {{ agendamento.valor }}
+    </div>
+    <div>
+      <strong>Observação:</strong> {{ agendamento.descricao }}
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

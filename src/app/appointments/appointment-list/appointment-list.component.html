@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<div class="main-container dark-theme">
+  <div class="content-wrapper">
+    <div class="header">
+      <h1 class="header-title">Agendamentos</h1>
+      <button
+        (click)="addNewAppointment()"
+        class="add-button"
+      >
+        <span>+</span> Novo Agendamento
+      </button>
+    </div>
+
+    <div class="filters">
+      <input
+        type="text"
+        placeholder="Filtrar por cliente"
+        [(ngModel)]="filterClient"
+        (input)="applyFilters()"
+      />
+      <input
+        type="date"
+        [(ngModel)]="filterDate"
+        (change)="applyFilters()"
+      />
+    </div>
+
+    <div class="section-card">
+      <h2 class="section-title">Todos os Agendamentos</h2>
+      <div *ngIf="filteredAppointments.length === 0" class="no-appointments-message">
+        Nenhum agendamento encontrado.
+      </div>
+      <div *ngIf="filteredAppointments.length > 0" class="appointment-list">
+        <div
+          *ngFor="let appointment of filteredAppointments"
+          class="appointment-item"
+        >
+          <div class="appointment-details">
+            <p class="client-name">{{ appointment.clientName }}</p>
+            <p class="appointment-info">
+              <span class="semibold">{{ appointment.date }}</span> às
+              <span class="semibold">{{ appointment.time }}</span>
+              <span *ngIf="appointment.pacote">- {{ appointment.pacote }}</span>
+            </p>
+            <p class="appointment-info">
+              Serviços: {{ formatarServicos(appointment.servicos) }}
+            </p>
+            <p class="appointment-info" *ngIf="appointment.valor">
+              Valor: R$ {{ appointment.valor }}
+            </p>
+          </div>
+          <button
+            (click)="editAppointment(appointment)"
+            class="edit-button"
+          >
+            Editar
+          </button>
+          <button
+            (click)="viewAppointment(appointment)"
+            class="edit-button"
+            style="background-color: #10b981; margin-left: 0.5rem;"
+          >
+            Visualizar
+          </button>
+          <button
+            (click)="deleteAppointment(appointment)"
+            class="edit-button"
+            style="background-color: #ef4444; margin-left: 0.5rem;"
+          >
+            Deletar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

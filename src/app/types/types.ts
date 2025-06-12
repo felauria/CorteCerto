@@ -13,8 +13,11 @@ export interface Appointment {
   clienteId: number;
   data: string;
   hora: string;
+  horaFim?: string;
   pacote?: string;
   descricao: string;
+  servicos: string[];
+  valor?: number;
 }
 
 export interface Usuario {
