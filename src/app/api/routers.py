@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 import json
 from pathlib import Path
+from datetime import datetime
 
 router = APIRouter()
 DB_PATH = Path(__file__).parent / "db.json"
@@ -14,6 +15,10 @@ def ler_db():
 def salvar_db(data):
     with open(DB_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def get_cliente_by_id(db, cliente_id):
+    return next((c for c in db.get("clientes", []) if c["id"] == cliente_id), None)
 
 
 # Rotas de autenticação e usuários
@@ -106,7 +111,12 @@ def obter_cliente(cliente_id: int):
 @router.get("/agendamentos")
 def listar_agendamentos():
     db = ler_db()
-    return db["agendamentos"]
+    agendamentos = db["agendamentos"]
+    result = []
+    for agendamento in agendamentos:
+        cliente = get_cliente_by_id(db, agendamento["cliente_id"])
+        result.append({"agendamento": agendamento, "cliente": cliente})
+    return result
 
 
 @router.post("/agendamentos")
@@ -143,16 +153,6 @@ def deletar_agendamento(agendamento_id: int):
     raise HTTPException(status_code=404, detail="Agendamento não encontrado")
 
 
-@router.get("/agendamentos/{agendamento_id}")
-def obter_agendamento(agendamento_id: int):
-    db = ler_db()
-    agendamentos = db["agendamentos"]
-    for agendamento in agendamentos:
-        if agendamento["id"] == agendamento_id:
-            return agendamento
-    raise HTTPException(status_code=404, detail="Agendamento não encontrado")
-
-
 @router.get("/agendamentos/cliente/{cliente_id}")
 def listar_agendamentos_por_cliente(cliente_id: int):
     db = ler_db()
@@ -160,4 +160,39 @@ def listar_agendamentos_por_cliente(cliente_id: int):
     agendamentos_cliente = [a for a in agendamentos if a["cliente_id"] == cliente_id]
     if not agendamentos_cliente:
         raise HTTPException(status_code=404, detail="Nenhum agendamento encontrado para este cliente")
-    return agendamentos_cliente
+    cliente = get_cliente_by_id(db, cliente_id)
+    return [{"agendamento": a, "cliente": cliente} for a in agendamentos_cliente]
+
+
+@router.get("/agendamentos/hoje")
+def listar_agendamentos_hoje():
+    db = ler_db()
+    agendamentos = db["agendamentos"]
+    hoje = datetime.now().date()
+    agora = datetime.now().time()
+    agendamentos_hoje = []
+    for agendamento in agendamentos:
+        data_str = agendamento.get("data")
+        hora_str = agendamento.get("hora")
+        if not data_str or not hora_str:
+            continue
+        try:
+            data_agendamento = datetime.strptime(data_str, "%Y-%m-%d").date()
+            hora_agendamento = datetime.strptime(hora_str, "%H:%M").time()
+        except ValueError:
+            continue
+        if data_agendamento == hoje and hora_agendamento >= agora:
+            cliente = get_cliente_by_id(db, agendamento["cliente_id"])
+            agendamentos_hoje.append({"agendamento": agendamento, "cliente": cliente})
+    return agendamentos_hoje
+
+
+@router.get("/agendamentos/{agendamento_id}")
+def obter_agendamento(agendamento_id: int):
+    db = ler_db()
+    agendamentos = db["agendamentos"]
+    for agendamento in agendamentos:
+        if agendamento["id"] == agendamento_id:
+            cliente = get_cliente_by_id(db, agendamento["cliente_id"])
+            return {"agendamento": agendamento, "cliente": cliente}
+    raise HTTPException(status_code=404, detail="Agendamento não encontrado")

@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AppointmentService } from '../../services/appointments.service';
+import { MatIconModule } from '@angular/material/icon'; // Adicione esta linha
 
 interface Appointment {
   nome: string;
@@ -21,54 +25,62 @@ interface Appointment {
     CommonModule,
     RouterModule,
     RouterLink,
+    MatIconModule, // Adicione aqui
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  agendamentosHoje: Appointment[] = [
-    {
-      nome: 'Felipe Lauria',
-      data: '24/02',
-      hora: '15:00',
-      pacote: 'Pacote básico',
-      descricao: 'Cabelo, sobrancelha e barba.',
-    },
-    {
-      nome: 'Guilherme Reis',
-      data: '24/02',
-      hora: '15:30',
-      pacote: 'Pacote premium',
-      descricao: 'Cabelo, luzes, sobrancelha e barba.',
-    },
-    {
-      nome: 'Diogo Nogueira',
-      data: '24/02',
-      hora: '16:30',
-      descricao: 'Cabelo e barba.',
-    },
-  ];
+export class HomeComponent implements OnInit {
+  agendamentosHoje: Appointment[] = [];
+  proximosAgendamentos: Appointment[] = [];
 
-  proximosAgendamentos: Appointment[] = [
-    {
-      nome: 'Lucas Campos',
-      data: '25/02',
-      hora: '09:00',
-      pacote: 'Pacote básico',
-      descricao: 'Cabelo.',
-    },
-    {
-      nome: 'Diogo Alves',
-      data: '25/02',
-      hora: '10:30',
-      pacote: 'Pacote premium',
-      descricao: 'Cabelo e sobrancelha.',
-    },
-    {
-      nome: 'João Marcelo',
-      data: '25/02',
-      hora: '11:00',
-      descricao: 'Cabelo e barba.',
-    },
-  ];
+  constructor(private appointmentService: AppointmentService) {}
+
+  ngOnInit(): void {
+    this.carregarAgendamentosHoje();
+    this.carregarProximosAgendamentos();
+  }
+
+  carregarAgendamentosHoje() {
+    this.appointmentService.getAgendamentosHoje().subscribe((data) => {
+      this.agendamentosHoje = data.map((item) => ({
+        nome: item.cliente?.nome || item.agendamento.nome,
+        data: this.formatarData(item.agendamento.data),
+        hora: item.agendamento.hora,
+        pacote: item.agendamento.pacote,
+        descricao: item.agendamento.descricao,
+      }));
+    });
+  }
+
+  carregarProximosAgendamentos() {
+    this.appointmentService.getAgendamentos().subscribe((data) => {
+      const hoje = new Date();
+      this.proximosAgendamentos = data
+        .filter((item) => {
+          const dataAgendamento = new Date(
+            item.agendamento.data + 'T' + item.agendamento.hora
+          );
+          return dataAgendamento > hoje;
+        })
+        .sort((a, b) => {
+          const dataA = new Date(a.agendamento.data + 'T' + a.agendamento.hora);
+          const dataB = new Date(b.agendamento.data + 'T' + b.agendamento.hora);
+          return dataA.getTime() - dataB.getTime();
+        })
+        .map((item) => ({
+          nome: item.cliente?.nome || item.agendamento.nome,
+          data: this.formatarData(item.agendamento.data),
+          hora: item.agendamento.hora,
+          pacote: item.agendamento.pacote,
+          descricao: item.agendamento.descricao,
+        }));
+    });
+  }
+
+  private formatarData(data: string): string {
+    if (!data) return '';
+    const [_, mes, dia] = data.split('-');
+    return `${dia}/${mes}`;
+  }
 }
