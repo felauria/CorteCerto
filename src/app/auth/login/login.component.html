@@ -17,7 +17,8 @@
       class="input-email"
     />
     <p *ngIf="emailError" class="error-message">{{ emailError }}</p>
-    <button class="btn-continue" (click)="continue()">Continue</button>
+    <button class="btn-continue" (click)="continue()">Entrar</button>
+    <button class="btn-cadaster" (click)="cadaster()">Cadastrar</button>
 
     <!-- FUTURA INTEGRACAO COM GOOGLE E FACEBOOK -->
     <!-- <p class="ou-text">Ou</p>
@@ -31,7 +32,7 @@
       Continue com Facebook
     </button> -->
 
-    <a href="#" class="forgot-link">Esqueci meu usuário/senha</a>
+    <!-- <a href="#" class="forgot-link">Esqueci meu usuário/senha</a> -->
   </div>
 
   <div class="login-right">

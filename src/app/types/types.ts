@@ -19,7 +19,10 @@ export interface Appointment {
 }
 
 export interface Usuario {
-  id: number;
+  id?: number;
   username: string;
   password: string;
+  nomeDaBarbearia: string;
+  nome: string;
+  sobrenome: string;
 }

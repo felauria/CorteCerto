@@ -3,7 +3,34 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "123456"
+      "password": "123",
+      "nomeDaBarbearia": "",
+      "nome": "",
+      "sobrenome": ""
+    },
+    {
+      "id": 2,
+      "username": "felauria",
+      "password": "301511",
+      "nomeDaBarbearia": "",
+      "nome": "",
+      "sobrenome": ""
+    },
+    {
+      "id": 3,
+      "username": "User teste",
+      "password": "123",
+      "nomeDaBarbearia": "Barbearia teste",
+      "nome": "Felps",
+      "sobrenome": "De teste"
+    },
+    {
+      "id": 4,
+      "username": "teste2",
+      "password": "br21",
+      "nomeDaBarbearia": "Barbearia brothers",
+      "nome": "Bruno",
+      "sobrenome": "De souza"
     }
   ],
   "clientes": [
