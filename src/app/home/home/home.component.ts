@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { RouterModule, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterModule, RouterLink } from '@angular/router';
 
 interface Appointment {
   nome: string;
@@ -21,7 +21,6 @@ interface Appointment {
     CommonModule,
     RouterModule,
     RouterLink,
-    RouterLinkActive,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],

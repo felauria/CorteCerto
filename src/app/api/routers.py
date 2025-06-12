@@ -41,6 +41,9 @@ def register(dados: dict):
         "id": novo_id,
         "username": dados["username"],
         "password": dados["password"],
+        "nomeDaBarbearia": dados.get("nomeDaBarbearia", ""),
+        "nome": dados.get("nome", ""),
+        "sobrenome": dados.get("sobrenome", ""),
     }
     usuarios.append(novo_usuario)
     db["usuarios"] = usuarios
@@ -64,6 +67,7 @@ def adicionar_cliente(cliente: dict):
     salvar_db(db)
     return cliente
 
+
 @router.put("/clientes/{cliente_id}")
 def atualizar_cliente(cliente_id: int, dados: dict):
     db = ler_db()
@@ -74,6 +78,7 @@ def atualizar_cliente(cliente_id: int, dados: dict):
             salvar_db(db)
             return clientes[idx]
     raise HTTPException(status_code=404, detail="Cliente não encontrado")
+
 
 @router.delete("/clientes/{cliente_id}")
 def deletar_cliente(cliente_id: int):
@@ -86,6 +91,7 @@ def deletar_cliente(cliente_id: int):
             return removido
     raise HTTPException(status_code=404, detail="Cliente não encontrado")
 
+
 @router.get("/clientes/{cliente_id}")
 def obter_cliente(cliente_id: int):
     db = ler_db()
@@ -94,6 +100,7 @@ def obter_cliente(cliente_id: int):
         if cliente["id"] == cliente_id:
             return cliente
     raise HTTPException(status_code=404, detail="Cliente não encontrado")
+
 
 # Rotas de agendamentos
 @router.get("/agendamentos")
@@ -111,6 +118,7 @@ def adicionar_agendamento(agendamento: dict):
     salvar_db(db)
     return agendamento
 
+
 @router.put("/agendamentos/{agendamento_id}")
 def atualizar_agendamento(agendamento_id: int, dados: dict):
     db = ler_db()
@@ -121,6 +129,7 @@ def atualizar_agendamento(agendamento_id: int, dados: dict):
             salvar_db(db)
             return agendamentos[idx]
     raise HTTPException(status_code=404, detail="Agendamento não encontrado")
+
 
 @router.delete("/agendamentos/{agendamento_id}")
 def deletar_agendamento(agendamento_id: int):
@@ -133,6 +142,7 @@ def deletar_agendamento(agendamento_id: int):
             return removido
     raise HTTPException(status_code=404, detail="Agendamento não encontrado")
 
+
 @router.get("/agendamentos/{agendamento_id}")
 def obter_agendamento(agendamento_id: int):
     db = ler_db()
@@ -141,6 +151,7 @@ def obter_agendamento(agendamento_id: int):
         if agendamento["id"] == agendamento_id:
             return agendamento
     raise HTTPException(status_code=404, detail="Agendamento não encontrado")
+
 
 @router.get("/agendamentos/cliente/{cliente_id}")
 def listar_agendamentos_por_cliente(cliente_id: int):

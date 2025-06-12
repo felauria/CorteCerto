@@ -7,13 +7,21 @@
     <input
       type="text"
       placeholder="Email ou username"
-      [(ngModel)]="email"
+      [(ngModel)]="username"
+      class="input-email"
+    />
+    <input
+      type="password"
+      placeholder="Senha"
+      [(ngModel)]="password"
       class="input-email"
     />
     <p *ngIf="emailError" class="error-message">{{ emailError }}</p>
-    <button class="btn-continue" (click)="continue()">Continue</button>
+    <button class="btn-continue" (click)="continue()">Entrar</button>
+    <button class="btn-cadaster" (click)="cadaster()">Cadastrar</button>
 
-    <p class="ou-text">Ou</p>
+    <!-- FUTURA INTEGRACAO COM GOOGLE E FACEBOOK -->
+    <!-- <p class="ou-text">Ou</p>
 
     <button class="btn-google">
       <img src="assets/google-icon.svg" alt="Google" />
@@ -22,9 +30,9 @@
     <button class="btn-facebook">
       <img src="assets/face-icon.svg" alt="Facebook" />
       Continue com Facebook
-    </button>
+    </button> -->
 
-    <a href="#" class="forgot-link">Esqueci meu usuário/senha</a>
+    <!-- <a href="#" class="forgot-link">Esqueci meu usuário/senha</a> -->
   </div>
 
   <div class="login-right">

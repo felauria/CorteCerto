@@ -1,1 +1,101 @@
-<p>register works!</p>
+<div class="register-container">
+  <div class="register-left">
+    <img src="assets/logo-corte-certo.svg" alt="Corte Certo" class="logo" />
+    <h1>Faça seu cadastro!</h1>
+    <p>Complete seu cadastro para acessar a plataforma</p>
+    <form (ngSubmit)="register()">
+      <input
+        type="text"
+        placeholder="Username"
+        [(ngModel)]="newUser.username"
+        name="username"
+        class="input-field"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Nome da barbearia"
+        [(ngModel)]="newUser.nomeDaBarbearia"
+        name="nomeDaBarbearia"
+        class="input-field"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Nome"
+        [(ngModel)]="newUser.nome"
+        name="nome"
+        class="input-field"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Sobrenome"
+        [(ngModel)]="newUser.sobrenome"
+        name="sobrenome"
+        class="input-field"
+      />
+      <input
+        type="password"
+        placeholder="Senha"
+        [(ngModel)]="newUser.password"
+        name="password"
+        class="input-field"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Confirmar senha"
+        [(ngModel)]="confirmarSenha"
+        name="confirmarSenha"
+        class="input-field"
+        required
+      />
+      <button type="submit" class="btn-cadastrar">Cadastrar</button>
+    </form>
+    <a href="#" class="back-link" (click)="goBack()">Voltar</a>
+  </div>
+  <div class="register-right">
+    <img src="assets/back-login.svg" alt="Barbearia" />
+  </div>
+</div>
+<div
+  *ngIf="showSuccessModal"
+  style="
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  "
+>
+  <div style="
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 90vw;
+  ">
+    <h2>Cadastro realizado!</h2>
+    <p>Seu cadastro foi efetuado com sucesso.</p>
+    <button
+      (click)="closeModalAndGoToLogin()"
+      style="
+        margin-top: 1.5rem;
+        padding: 0.7rem 2rem;
+        background: #17a589;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+      "
+    >
+      Ir para login
+    </button>
+  </div>
+</div>

@@ -59,6 +59,19 @@ p {
   font-size: 1.1rem;
 }
 
+.btn-cadaster {
+  background-color: #04483a;
+  border: none;
+  width: 100%;
+  padding: 0.8rem 0;
+  color: white;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
 .ou-text {
   text-align: center;
   width: 100%;
