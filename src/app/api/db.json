@@ -72,6 +72,11 @@
       "data": "2025-06-12",
       "hora": "14:00",
       "pacote": "básico",
+      "servicos": [
+        "Cabelo",
+        "Sobrancelha",
+        "Barba"
+      ],
       "descricao": "Cabelo, sobrancelha e barba."
     },
     {
@@ -80,6 +85,12 @@
       "data": "2025-06-12",
       "hora": "15:30",
       "pacote": "premium",
+      "servicos": [
+        "Cabelo",
+        "Luzes",
+        "Sobrancelha",
+        "Barba"
+      ],
       "descricao": "Cabelo, luzes, sobrancelha e barba."
     },
     {
@@ -87,6 +98,10 @@
       "cliente_id": 3,
       "data": "2025-06-12",
       "hora": "16:30",
+      "servicos": [
+        "Cabelo",
+        "Barba"
+      ],
       "descricao": "Cabelo e barba."
     },
     {
@@ -95,6 +110,9 @@
       "data": "2025-06-13",
       "hora": "09:00",
       "pacote": "básico",
+      "servicos": [
+        "Cabelo"
+      ],
       "descricao": "Cabelo."
     },
     {
@@ -103,6 +121,10 @@
       "data": "2025-06-13",
       "hora": "10:30",
       "pacote": "premium",
+      "servicos": [
+        "Cabelo",
+        "Sobrancelha"
+      ],
       "descricao": "Cabelo e sobrancelha."
     },
     {
@@ -110,7 +132,37 @@
       "cliente_id": 6,
       "data": "2025-06-13",
       "hora": "11:00",
+      "servicos": [
+        "Cabelo",
+        "Barba"
+      ],
       "descricao": "Cabelo e barba."
+    },
+    {
+      "clienteId": "1",
+      "data": "2025-12-13",
+      "hora": "12:12",
+      "descricao": "",
+      "horaFim": "13:13",
+      "servicos": [
+        "Corte",
+        "Tinta",
+        "Barba"
+      ],
+      "valor": 190,
+      "id": 7
+    },
+    {
+      "clienteId": "3",
+      "data": "2025-06-27",
+      "hora": "12:50",
+      "descricao": "",
+      "horaFim": "13:00",
+      "servicos": [
+        "Corte"
+      ],
+      "valor": 50,
+      "id": 8
     }
   ]
 }

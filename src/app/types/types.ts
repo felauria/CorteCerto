@@ -10,7 +10,6 @@ export interface Cliente {
 }
 
 export interface Appointment {
-  nome: string;
   clienteId: number;
   data: string;
   hora: string;
