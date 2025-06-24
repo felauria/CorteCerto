@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
-import { ChartOptions, ChartType, ChartData } from 'chart.js';
+import { ChartConfiguration, ChartType } from 'chart.js';
 import { AppointmentService } from '../../services/appointments.service';
 import { ClientService } from '../../services/client.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
@@ -10,21 +10,56 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NgChartsModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, NavbarComponent, FooterComponent, NgChartsModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   agendamentos: any[] = [];
   clientes: any[] = [];
 
-  pieChartLabels: string[] = [];
-  pieChartData: number[] = [];
+  totalGanhos = 0;
+  totalAgendamentos = 0;
+  servicosContagem: { [key: string]: number } = {};
+
+  pieChartData: ChartConfiguration<'pie'>['data'] = {
+    labels: [],
+    datasets: [{ data: [] }]
+  };
   pieChartType: ChartType = 'pie';
 
-  barChartLabels: string[] = [];
-  barChartData: any[] = [{ data: [], label: 'Cortes por mês' }];
+  barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: [{ data: [], label: 'Cortes por mês' }]
+  };
   barChartType: ChartType = 'bar';
+
+  chartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white'
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: 'white'
+        }
+      },
+      y: {
+        ticks: {
+          color: 'white'
+        }
+      }
+    }
+  };
+
+  currentYear() {
+    return new Date().getFullYear();
+  }
 
   constructor(
     private appointmentService: AppointmentService,
@@ -36,18 +71,19 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarDados() {
-    this.clientService.getClientes().subscribe(clientes => {
-      this.clientes = clientes;
-      this.appointmentService.getAgendamentos().subscribe(agendamentos => {
-        this.agendamentos = agendamentos;
-        this.prepararGraficos();
-      });
+    this.appointmentService.getAgendamentos().subscribe(response => {
+      // Desconstruindo os dados que vêm no response
+      this.agendamentos = response.map((item: any) => item.agendamento);
+      this.clientes = response.map((item: any) => item.cliente);
+
+      this.processarDados();
     });
   }
 
-  prepararGraficos() {
+  processarDados() {
     this.prepararGraficoPizza();
     this.prepararGraficoBarras();
+    this.calcularTotais();
   }
 
   prepararGraficoPizza() {
@@ -64,12 +100,16 @@ export class DashboardComponent implements OnInit {
       contagem[a.cliente_id] = (contagem[a.cliente_id] || 0) + 1;
     });
 
-    this.pieChartLabels = Object.keys(contagem)
-      .map(id => {
-        const cliente = this.clientes.find(c => c.id == +id);
-        return cliente ? cliente.nome : 'Desconhecido';
-      });
-    this.pieChartData = Object.values(contagem);
+    const labels = Object.keys(contagem).map(id => {
+      const cliente = this.clientes.find(c => c.id == +id);
+      return cliente ? cliente.nome : 'Desconhecido';
+    });
+    const data = Object.values(contagem);
+
+    this.pieChartData = {
+      labels: labels,
+      datasets: [{ data: data }]
+    };
   }
 
   prepararGraficoBarras() {
@@ -87,7 +127,26 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.barChartLabels = meses;
-    this.barChartData = [{ data: cortesPorMes, label: 'Cortes por mês' }];
+    this.barChartData = {
+      labels: meses,
+      datasets: [{ data: cortesPorMes, label: 'Cortes por mês' }]
+    };
+  }
+
+  calcularTotais() {
+    this.totalGanhos = this.agendamentos.reduce(
+      (acc, a) => acc + (a.valor || 0),
+      0
+    );
+    this.totalAgendamentos = this.agendamentos.length;
+
+    this.servicosContagem = {};
+    this.agendamentos.forEach(a => {
+      if (a.servicos && Array.isArray(a.servicos)) {
+        a.servicos.forEach((s: string) => {
+          this.servicosContagem[s] = (this.servicosContagem[s] || 0) + 1;
+        });
+      }
+    });
   }
 }
