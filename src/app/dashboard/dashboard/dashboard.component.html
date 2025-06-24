@@ -1,31 +1,46 @@
 <app-navbar></app-navbar>
-<div class="container" style="min-height:80vh;">
-  <h2 style="margin-top:2rem;">Dashboard</h2>
-  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top:2rem;">
-    <div style="flex:1; min-width:320px; background:#191919; border-radius:12px; padding:2rem;">
-      <h3 style="color:#25b19e;">Clientes que mais cortaram (mês atual)</h3>
+
+<div class="container">
+  <h2>Dashboard - Relatório de Agendamentos</h2>
+
+  <div class="resumo">
+    <div class="card-resumo">
+      <h3>Total de Ganhos</h3>
+      <p>R$ {{ totalGanhos }},00</p>
+    </div>
+    <div class="card-resumo">
+      <h3>Total de Agendamentos</h3>
+      <p>{{ totalAgendamentos }}</p>
+    </div>
+    <div class="card-resumo">
+      <h3>Serviços Realizados</h3>
+      <ul>
+        <li *ngFor="let servico of (servicosContagem | keyvalue)">
+          {{ servico.key }}: {{ servico.value }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="graficos">
+    <div class="card-grafico">
+      <h3>Clientes que mais cortaram (mês atual)</h3>
       <canvas baseChart
         [data]="pieChartData"
-        [labels]="pieChartLabels"
         [type]="pieChartType"
-        [legend]="true"
-        [options]="{responsive:true, plugins:{legend:{labels:{color:'white'}}}}"
-      ></canvas>
+        [options]="chartOptions">
+      </canvas>
     </div>
-    <div style="flex:1; min-width:320px; background:#191919; border-radius:12px; padding:2rem;">
-      <h3 style="color:#25b19e;">Cortes por mês ({{ (new Date()).getFullYear() }})</h3>
+
+    <div class="card-grafico">
+      <h3>Cortes por mês ({{ currYear() }})</h3>
       <canvas baseChart
         [data]="barChartData"
-        [labels]="barChartLabels"
         [type]="barChartType"
-        [legend]="true"
-        [options]="{
-          responsive:true,
-          plugins:{legend:{labels:{color:'white'}}},
-          scales:{x:{ticks:{color:'white'}}, y:{ticks:{color:'white'}}}
-        }"
-      ></canvas>
+        [options]="chartOptions">
+      </canvas>
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>

@@ -13,6 +13,7 @@ import { ClientViewComponent } from "./clients/client-view/client-view.component
 import { AppointmentFormComponent } from "./appointments/appointment-form/appointment-form.component";
 import { AppointmentListComponent } from "./appointments/appointment-list/appointment-list.component"
 import { AppointmentViewComponent } from "./appointments/appointment-view/appointment-view.component"
+import { DashboardComponent } from "./dashboard/dashboard/dashboard.component"
 
 
 export const appRoutes: Routes = [
@@ -54,6 +55,16 @@ export const appRoutes: Routes = [
   {
     path: "agendamentos/lista",
     component: AppointmentListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: "agendamentos",
+    redirectTo: "agendamentos/lista",
+    pathMatch: "full",
+  },
+  {
+    path: "dashboard",
+    component: DashboardComponent,
     canActivate: [authGuard],
   },
   { path: "**", redirectTo: "login" },
